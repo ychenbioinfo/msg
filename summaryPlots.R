@@ -1,11 +1,10 @@
 #!/usr/bin/env Rscript
 
-source(sprintf("%s/ded.R", "msg"))
-source(sprintf("%s/hmmlib.R", "msg"))
+args <- commandArgs()
+dollar0 <- substring(args[grep("^--file=", args)], 8)
 
-plot.correlation.matrix <- TRUE
-write.ancestry.probs <- TRUE
-breakpoint.widths <- FALSE
+source(sprintf("%s/ded.R", dirname(dollar0)))
+source(sprintf("%s/hmmlib.R", dirname(dollar0)))
 
 ## If you are running this code interactively (i.e. separately from a
 ## run of the MSG software) then don't evalue the following line.
@@ -15,6 +14,11 @@ opts <- getopts()
 ## the 'opts' object will be in the output file for MSG run 3, as a
 ## result of this line:
 cat("Input parameters for summaryPlots.R\nopts <-") ; dput(opts)
+
+stopifnot(length("l" %in% names(opts)) > 0)
+plot.correlation.matrix <- opts$l > 0
+write.ancestry.probs <- TRUE
+breakpoint.widths <- FALSE
 
 bc <- opts$b
 dir <- opts$d
@@ -221,4 +225,4 @@ if(plot.correlation.matrix) {
 	}
 }
 
-if(breakpoint.widths) source(sprintf("%s/breakpoint-widths.R", "msg"))
+if(breakpoint.widths) source(sprintf("%s/breakpoint-widths.R", dirname(dollar0)))
