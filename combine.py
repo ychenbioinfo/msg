@@ -139,7 +139,11 @@ def merge(dir):
     #for each parent
     dp1, dp2 = {}, {}
     for (array, ind, chrom) in input_data_sets(dir):
-        print ind, chrom, len(array), "records"
+        try:
+            print ind, chrom, len(array), "records"
+        except:
+            print ind, chrom, '0', "records"
+            continue
         for x in array:
             # convert to float first to avoid the error when the number is using scientific notation
             key = (ind, chrom, int(float(x['pos']))) 
