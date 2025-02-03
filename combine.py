@@ -139,10 +139,6 @@ def merge(dir):
     #for each parent
     dp1, dp2 = {}, {}
     for (array, ind, chrom) in input_data_sets(dir):
-        # skip run when there is no reads aligned
-        if not array: 
-            print ind, chrom, "no reads aligned"
-            continue
         print ind, chrom, len(array), "records"
         for x in array:
             # convert to float first to avoid the error when the number is using scientific notation
